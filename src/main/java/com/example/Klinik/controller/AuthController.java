@@ -1,6 +1,7 @@
 package com.example.Klinik.controller;
 
 import com.example.Klinik.model.dto.auth.AuthResponse;
+import com.example.Klinik.model.dto.auth.DoctorRegisterRequest;
 import com.example.Klinik.model.dto.auth.LoginRequest;
 import com.example.Klinik.model.dto.auth.RegisterRequest;
 import com.example.Klinik.service.AuthService;
@@ -23,6 +24,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public AuthResponse register(@RequestBody RegisterRequest request) {
+        return authService.register(request);
+    }
+
+    @PostMapping("/doctor/register")
+    public AuthResponse registerDoctor(@RequestBody DoctorRegisterRequest request) {
         return authService.register(request);
     }
 }

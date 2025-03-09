@@ -5,8 +5,10 @@ import com.example.Klinik.exception.CustomException;
 import com.example.Klinik.mapper.AuthMapper;
 import com.example.Klinik.model.domain.User;
 import com.example.Klinik.model.dto.auth.AuthResponse;
+import com.example.Klinik.model.dto.auth.DoctorRegisterRequest;
 import com.example.Klinik.model.dto.auth.LoginRequest;
 import com.example.Klinik.model.dto.auth.RegisterRequest;
+import com.example.Klinik.repository.DoctorRepository;
 import com.example.Klinik.repository.UserRepository;
 import com.example.Klinik.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
+    private final DoctorRepository doctorRepository;
     private final AuthMapper authMapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -50,6 +53,24 @@ public class AuthServiceImpl implements AuthService {
 
         request.setPassword(passwordEncoder.encode(request.getPassword()));
         User user = userRepository.save(authMapper.toUser(request));
+
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setToken(
+                jwtService.generateToken(user)
+        );
+        return authResponse;
+    }
+
+    @Override
+    public AuthResponse register(DoctorRegisterRequest request) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new CustomException("User with this email is already exists", HttpStatus.CONFLICT);
+        }
+
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
+        User user = userRepository.save(authMapper.toUser(request));
+
+        doctorRepository.save(authMapper.toDoctor(request, user));
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken(
