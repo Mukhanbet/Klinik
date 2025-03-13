@@ -19,6 +19,7 @@ public class DoctorMapperImpl implements DoctorMapper {
         response.setFacebook(doctor.getFacebook());
         response.setInstagram(doctor.getInstagram());
         response.setWhatsapp(doctor.getWhatsapp());
+        response.setImageUrl(doctor.getImage().getPath());
         return response;
     }
 

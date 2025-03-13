@@ -11,12 +11,14 @@ import com.example.Klinik.model.dto.auth.RegisterRequest;
 import com.example.Klinik.repository.DoctorRepository;
 import com.example.Klinik.repository.UserRepository;
 import com.example.Klinik.service.AuthService;
+import com.example.Klinik.service.ImageService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +29,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final ImageService imageService;
 
     @Override
     public AuthResponse login(LoginRequest request) {
@@ -62,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponse register(DoctorRegisterRequest request) {
+    public AuthResponse register(DoctorRegisterRequest request, MultipartFile file) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new CustomException("User with this email is already exists", HttpStatus.CONFLICT);
         }
@@ -70,7 +73,13 @@ public class AuthServiceImpl implements AuthService {
         request.setPassword(passwordEncoder.encode(request.getPassword()));
         User user = userRepository.save(authMapper.toUser(request));
 
-        doctorRepository.save(authMapper.toDoctor(request, user));
+        doctorRepository.save(
+                authMapper.toDoctor(
+                        request,
+                        user,
+                        imageService.save(file)
+                )
+        );
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken(

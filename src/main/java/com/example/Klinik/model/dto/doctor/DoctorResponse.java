@@ -19,4 +19,6 @@ public class DoctorResponse {
 
     private String whatsapp;
 
+    private String imageUrl;
+
 }

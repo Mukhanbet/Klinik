@@ -64,7 +64,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentMapper.toResponseList(appointmentRepository.findAllByPatient(patient));
     }
 
-    @Scheduled
+    @Scheduled(cron = "0 */5 * * * *")
     private void updateStatuses() {
         for (Appointment appointment : appointmentRepository.findAll()) {
             if (appointment.getDate().isBefore(LocalDateTime.now())) {

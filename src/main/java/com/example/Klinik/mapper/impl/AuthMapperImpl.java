@@ -2,6 +2,7 @@ package com.example.Klinik.mapper.impl;
 
 import com.example.Klinik.mapper.AuthMapper;
 import com.example.Klinik.model.domain.Doctor;
+import com.example.Klinik.model.domain.Image;
 import com.example.Klinik.model.domain.User;
 import com.example.Klinik.model.dto.auth.DoctorRegisterRequest;
 import com.example.Klinik.model.dto.auth.RegisterRequest;
@@ -23,7 +24,7 @@ public class AuthMapperImpl implements AuthMapper {
     }
 
     @Override
-    public Doctor toDoctor(DoctorRegisterRequest request, User user) {
+    public Doctor toDoctor(DoctorRegisterRequest request, User user, Image image) {
         Doctor doctor = new Doctor();
         doctor.setDepartment(request.getDepartment());
         doctor.setFacebook(request.getFacebook());
@@ -31,6 +32,7 @@ public class AuthMapperImpl implements AuthMapper {
         doctor.setWhatsapp(request.getWhatsapp());
         user.setRole(Role.DOCTOR);
         doctor.setUserDetails(user);
+        doctor.setImage(image);
         return doctor;
     }
 }

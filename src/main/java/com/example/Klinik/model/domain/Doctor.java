@@ -46,5 +46,7 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointment;
 
-    // todo: Add here OneToOne to image
+    @OneToOne
+    @JoinColumn
+    private Image image;
 }
