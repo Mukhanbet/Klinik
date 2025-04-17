@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/auth/fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/auth/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/auth/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/auth/css/style.css}">
+    <title>Doctor Registration</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h3 class="mb-4 text-center">Doctor Registration</h3>
+            <form th:action="@{/api/auth/doctor/register}" method="post" enctype="multipart/form-data" th:object="${doctorRequest}">
+                <div class="row">
+
+                    <!-- Left column -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" th:field="*{name}" placeholder="Full Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" th:field="*{email}" placeholder="Email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" id="mobile" class="form-control" th:field="*{mobile}" placeholder="Phone Number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" th:field="*{password}" placeholder="Password">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <input type="text" id="department" class="form-control" th:field="*{department}" placeholder="Cardiology, etc.">
+                        </div>
+                    </div>
+
+                    <!-- Right column -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="text" id="facebook" class="form-control" th:field="*{facebook}" placeholder="Facebook">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instagram">Instagram</label>
+                            <input type="text" id="instagram" class="form-control" th:field="*{instagram}" placeholder="Instagram">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp</label>
+                            <input type="text" id="whatsapp" class="form-control" th:field="*{whatsapp}" placeholder="WhatsApp">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Profile Image</label>
+                            <input type="file" id="image" name="image" class="form-control">
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <input type="submit" value="Register" class="btn btn-primary btn-block">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/auth/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/auth/js/popper.min.js}"></script>
+<script th:src="@{/auth/js/bootstrap.min.js}"></script>
+<script th:src="@{/auth/js/main.js}"></script>
+
+</body>
+</html>
