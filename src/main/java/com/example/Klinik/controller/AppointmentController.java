@@ -26,6 +26,7 @@ public class AppointmentController {
             @RequestHeader("Authorization") String token,
             @PathVariable Long doctorId
     ) {
+        System.out.println("\n\nToken:  " + token);
         return appointmentService.makeAppointment(request, token, doctorId);
     }
 

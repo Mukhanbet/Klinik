@@ -32,6 +32,8 @@ public class PageController {
 
     @GetMapping("/appointment")
     public String appointment(Model model) {
+        List<DoctorResponse> doctors = doctorService.all();
+        model.addAttribute("doctors", doctors);
         return "appointment";
     }
 
