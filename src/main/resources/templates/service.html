@@ -127,66 +127,18 @@
                 <h1>Health Care Solutions</h1>
             </div>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-heartbeat text-primary fs-4"></i>
+                <th:block th:each="service, iterStat : ${services}">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" th:data-wow-delay="${iterStat.index % 4 * 0.2} + 's'">
+                        <div class="service-item bg-light rounded h-100 p-5">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                                <img th:src="@{${service.iconUrl}}" alt="Service Icon" class="img-fluid" style="width: 65px; height: 65px; object-fit: cover;">
+                            </div>
+                            <h4 class="mb-3" th:text="${service.name}">Service Name</h4>
+                            <p class="mb-4" th:text="${service.description}">Service Description</p>
+                            <a class="btn" href="#"><i class="fa fa-plus text-primary me-3"></i>Read More</a>
                         </div>
-                        <h4 class="mb-3">Cardiology</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-x-ray text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Pulmonary</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-brain text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Neurology</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-wheelchair text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Orthopedics</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-tooth text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Dental Surgery</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-vials text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Laboratory</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
-                    </div>
-                </div>
+                </th:block>
             </div>
         </div>
     </div>
@@ -200,7 +152,8 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <p class="d-inline-block border rounded-pill py-1 px-4">Appointment</p>
                     <h1 class="mb-4">Make An Appointment To Visit Our Doctor</h1>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                    <p class="mb-4">You can book an appointment by choosing a doctor, date and time below.</p>
+
                     <div class="bg-light rounded d-flex align-items-center p-5 mb-4">
                         <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
                             <i class="fa fa-phone-alt text-primary"></i>
@@ -220,49 +173,108 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="bg-light rounded h-100 d-flex align-items-center p-5">
-                        <form>
+                        <form id="appointment-form">
                             <div class="row g-3">
+
+                                <!-- Doctor selection -->
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Mobile" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Choose Doctor</option>
-                                        <option value="1">Doctor 1</option>
-                                        <option value="2">Doctor 2</option>
-                                        <option value="3">Doctor 3</option>
+                                    <select class="form-select border-0" id="doctorId" name="doctorId" style="height: 55px;" required>
+                                        <option value="" selected disabled>Choose Doctor</option>
+                                        <th:block th:each="doctor : ${doctors}">
+                                            <option th:value="${doctor.id}" th:text="${doctor.name}"></option>
+                                        </th:block>
                                     </select>
                                 </div>
+
+                                <!-- Date -->
                                 <div class="col-12 col-sm-6">
                                     <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control border-0 datetimepicker-input"
-                                            placeholder="Choose Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;">
+                                        <input type="text" name="date"
+                                               class="form-control border-0 datetimepicker-input"
+                                               placeholder="Choose Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;" required>
                                     </div>
                                 </div>
+
+                                <!-- Time -->
                                 <div class="col-12 col-sm-6">
                                     <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control border-0 datetimepicker-input"
-                                            placeholder="Choose Date" data-target="#time" data-toggle="datetimepicker" style="height: 55px;">
+                                        <input type="text" name="time"
+                                               class="form-control border-0 datetimepicker-input"
+                                               placeholder="Choose Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;" required>
                                     </div>
                                 </div>
+
+                                <!-- Description -->
                                 <div class="col-12">
-                                    <textarea class="form-control border-0" rows="5" placeholder="Describe your problem"></textarea>
+                                    <textarea class="form-control border-0" name="description" rows="5" placeholder="Describe your problem" required></textarea>
                                 </div>
+
+                                <!-- Submit button -->
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">Book Appointment</button>
                                 </div>
                             </div>
                         </form>
+
+                        <!-- Script to handle form submit -->
+                        <script>
+                            document.getElementById("appointment-form").addEventListener("submit", async function(event) {
+                                event.preventDefault();
+
+                                const doctorId = document.getElementById("doctorId").value;
+                                const dateStr = document.querySelector("input[name='date']").value;     // example: "04/20/2025"
+                                const timeStr = document.querySelector("input[name='time']").value;     // example: "11:26 AM"
+                                const description = document.querySelector("textarea[name='description']").value;
+
+                                const token = document.cookie.split('; ')
+                                    .find(row => row.startsWith('access_token='))
+                                    ?.split('=')[1];
+
+                                if (!dateStr || !timeStr) {
+                                    alert("Please fill out both date and time.");
+                                    return;
+                                }
+
+                                const dateTimeString = `${dateStr} ${timeStr}`;
+                                const parsedDate = new Date(dateTimeString);
+
+                                if (isNaN(parsedDate.getTime())) {
+                                    alert("Invalid date or time format.");
+                                    return;
+                                }
+
+                                const pad = (num) => num.toString().padStart(2, '0');
+                                const year = parsedDate.getFullYear();
+                                const month = pad(parsedDate.getMonth() + 1);
+                                const day = pad(parsedDate.getDate());
+                                const hours = pad(parsedDate.getHours());
+                                const minutes = pad(parsedDate.getMinutes());
+                                const startTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+                                const response = await fetch(`/api/appointments/${doctorId}`, {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "Authorization": `Bearer ${token}`
+                                    },
+                                    body: JSON.stringify({
+                                        startTime: startTime,
+                                        description: description
+                                    })
+                                });
+
+                                if (response.ok) {
+                                    alert("Appointment booked successfully!");
+                                    window.location.reload();
+                                } else {
+                                    alert("Failed to book appointment.");
+                                }
+                            });
+                        </script>
+
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import com.example.Klinik.mapper.ServiceMapper;
 import com.example.Klinik.model.dto.service.ServiceRequest;
 import com.example.Klinik.model.dto.service.ServiceResponse;
 import com.example.Klinik.repository.ServiceRepository;
+import com.example.Klinik.service.ImageService;
 import com.example.Klinik.service.ServiceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ServiceServiceImpl implements ServiceService {
     private final ServiceRepository serviceRepository;
     private final ServiceMapper serviceMapper;
+    private final ImageService imageService;
 
     @Override
     public ServiceResponse create(ServiceRequest serviceRequest, MultipartFile icon) {
@@ -27,7 +29,7 @@ public class ServiceServiceImpl implements ServiceService {
 
         return serviceMapper.toResponse(
                 serviceRepository.save(
-                        serviceMapper.toService(serviceRequest)
+                        serviceMapper.toService(serviceRequest, imageService.save(icon))
                 )
         );
 

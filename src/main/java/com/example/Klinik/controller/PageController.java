@@ -4,7 +4,9 @@ import com.example.Klinik.model.dto.auth.DoctorRegisterRequest;
 import com.example.Klinik.model.dto.auth.LoginRequest;
 import com.example.Klinik.model.dto.auth.RegisterRequest;
 import com.example.Klinik.model.dto.doctor.DoctorResponse;
+import com.example.Klinik.model.dto.service.ServiceResponse;
 import com.example.Klinik.service.DoctorService;
+import com.example.Klinik.service.ServiceService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import java.util.List;
 public class PageController {
 
     private final DoctorService doctorService;
+    private final ServiceService service;
 
     @GetMapping("/not-found")
     public String notFound(Model model) {
@@ -54,6 +57,11 @@ public class PageController {
 
     @GetMapping("/service")
     public String service(Model model) {
+        List<ServiceResponse> services = service.all();
+        List<DoctorResponse> doctors = doctorService.all();
+        
+        model.addAttribute("doctors", doctors);
+        model.addAttribute("services", services);
         return "service";
     }
 

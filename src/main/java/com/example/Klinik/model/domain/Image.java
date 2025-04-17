@@ -29,4 +29,6 @@ public class Image {
     @OneToOne(mappedBy = "image")
     private Doctor doctor;
 
+    @OneToOne(mappedBy = "icon")
+    private Service service;
 }

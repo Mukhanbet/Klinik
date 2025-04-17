@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +27,7 @@ public class Service {
     @Column(nullable = false)
     private String description;
 
-    // todo add here the icon of the service
+    @OneToOne
+    @JoinColumn
+    private Image icon;
 }
