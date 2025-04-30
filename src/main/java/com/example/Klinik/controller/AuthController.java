@@ -36,10 +36,9 @@ public class AuthController {
     @PostMapping("/doctor/register")
     public String registerDoctor(
             @ModelAttribute DoctorRegisterRequest request,
-            @RequestParam MultipartFile image,
-            HttpServletResponse response
+            @RequestParam MultipartFile image
     ) {
-        cookieOperation(authService.register(request, image), response);
+        authService.register(request, image);
         return "redirect:/api/pages/home";
     }
 

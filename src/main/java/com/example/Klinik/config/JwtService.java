@@ -10,6 +10,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,12 @@ public class JwtService {
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
 
-        String role = userDetails.getAuthorities().toString();
+        String role = userDetails.getAuthorities()
+                .stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse("ROLE_USER");
+
         claims.put("role", role);
 
         Date issuedDate = new Date();
@@ -64,6 +70,10 @@ public class JwtService {
         token = token.substring(7);
         String email = getUserEmailFromToken(token);
         return userRepository.findByEmail(email).orElseThrow(() -> new CustomException("User not found", HttpStatus.NOT_FOUND));
+    }
+
+    public String getRoleFromToken(String token) {
+        return (String) getClaimsFromToken(token).get("role");
     }
 
     private Key getSignInKey() {

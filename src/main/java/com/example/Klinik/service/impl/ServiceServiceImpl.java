@@ -22,14 +22,14 @@ public class ServiceServiceImpl implements ServiceService {
     private final ImageService imageService;
 
     @Override
-    public ServiceResponse create(ServiceRequest serviceRequest, MultipartFile icon) {
+    public ServiceResponse create(ServiceRequest serviceRequest, MultipartFile icon, MultipartFile image) {
         if (serviceRepository.findByName(serviceRequest.getName()).isPresent()) {
             throw new CustomException("Service with this name is already exists", HttpStatus.CONFLICT);
         }
 
         return serviceMapper.toResponse(
                 serviceRepository.save(
-                        serviceMapper.toService(serviceRequest, imageService.save(icon))
+                        serviceMapper.toService(serviceRequest, imageService.save(icon), imageService.save(image))
                 )
         );
 

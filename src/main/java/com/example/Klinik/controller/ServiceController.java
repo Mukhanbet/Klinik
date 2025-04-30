@@ -24,9 +24,10 @@ public class ServiceController {
     @PostMapping
     public ServiceResponse create(
             @RequestPart ServiceRequest serviceRequest,
-            @RequestPart MultipartFile icon
+            @RequestPart MultipartFile icon,
+            @RequestPart MultipartFile mainImage
     ) {
-        return service.create(serviceRequest, icon);
+        return service.create(serviceRequest, icon, mainImage);
     }
 
     @DeleteMapping("/{id}")

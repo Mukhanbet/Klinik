@@ -19,22 +19,22 @@ public class SecurityFilter {
     private final JwtFilter jwtFilter;
     private static final String[] WHITE_LIST_URL = { "/api/v1/auth/**", "/v2/api-docs", "/v3/api-docs",
             "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**", "/configuration/ui",
-            "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html", "/api/auth/**",
-            "/api/test/**", "/authenticate" };
+            "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html", "/api/auth/register",
+            "/api/test/**", "/authenticate", "/api/auth/login", "/api/pages/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/**").permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/doctor/register", "/api/pages/doctor-register").hasRole("ADMIN")
                         .requestMatchers(WHITE_LIST_URL).permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(form -> form
-                        .loginPage("/pages/auth")
-                        .loginProcessingUrl("/pages/auth")
-                        .defaultSuccessUrl("/pages/auth")
-                        .failureForwardUrl("/pages/auth")
+                        .loginPage("/api/auth/login")
+                        .loginProcessingUrl("/api/auth/login")
+                        .defaultSuccessUrl("/api/pages/home")
+                        .failureForwardUrl("/api/auth/login")
                         .permitAll()
                         .disable())
                 .exceptionHandling(exception -> exception

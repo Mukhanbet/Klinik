@@ -91,8 +91,7 @@
                         <a th:href="@{/api/pages/feature}" class="dropdown-item">Feature</a>
                         <a th:href="@{/api/pages/our-doctor}" class="dropdown-item">Our Doctor</a>
                         <a th:href="@{/api/pages/appointment}" class="dropdown-item active">Appointment</a>
-                        <a th:href="@{/api/pages/testimonial}" class="dropdown-item">Testimonial</a>
-                        <a th:href="@{/api/pages/not-found}" class="dropdown-item">404 Page</a>
+
                     </div>
                 </div>
                 <a th:href="@{/api/pages/contact}" class="nav-item nav-link">Contact</a>
@@ -294,7 +293,9 @@
                     <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <a href="/api/pages/register" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">
+    SignUp
+</a>
                     </div>
                 </div>
             </div>

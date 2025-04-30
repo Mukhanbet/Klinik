@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ServiceMapper {
 
-    Service toService(ServiceRequest request, Image icon);
+    Service toService(ServiceRequest request, Image icon, Image mainImage);
 
     ServiceResponse toResponse(Service service);
 

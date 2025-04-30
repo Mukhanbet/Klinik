@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ServiceService {
 
-    ServiceResponse create(ServiceRequest serviceRequest, MultipartFile icon);
+    ServiceResponse create(ServiceRequest serviceRequest, MultipartFile icon, MultipartFile mainImage);
 
     void delete(Long id);
 

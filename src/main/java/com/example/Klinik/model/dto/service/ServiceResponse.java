@@ -15,4 +15,6 @@ public class ServiceResponse {
 
     private String iconUrl;
 
+    private String mainImageUrl;
+
 }

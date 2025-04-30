@@ -1,10 +1,13 @@
 package com.example.Klinik.controller;
 
+import com.example.Klinik.model.domain.About;
 import com.example.Klinik.model.dto.auth.DoctorRegisterRequest;
 import com.example.Klinik.model.dto.auth.LoginRequest;
 import com.example.Klinik.model.dto.auth.RegisterRequest;
+import com.example.Klinik.model.dto.doctor.AmountResponse;
 import com.example.Klinik.model.dto.doctor.DoctorResponse;
 import com.example.Klinik.model.dto.service.ServiceResponse;
+import com.example.Klinik.service.AboutService;
 import com.example.Klinik.service.DoctorService;
 import com.example.Klinik.service.ServiceService;
 import lombok.AllArgsConstructor;
@@ -22,6 +25,7 @@ public class PageController {
 
     private final DoctorService doctorService;
     private final ServiceService service;
+    private final AboutService aboutService;
 
     @GetMapping("/not-found")
     public String notFound(Model model) {
@@ -30,6 +34,9 @@ public class PageController {
 
     @GetMapping("/about")
     public String about(Model model) {
+        List<About> aboutList = aboutService.all();
+        model.addAttribute("aboutList", aboutList);
+
         return "about";
     }
 
@@ -52,6 +59,15 @@ public class PageController {
 
     @GetMapping("/home")
     public String home(Model model) {
+        List<DoctorResponse> doctors = doctorService.all();
+        List<ServiceResponse> services = service.all();
+        AmountResponse amount = doctorService.getAmount();
+        List<About> aboutList = aboutService.all();
+
+        model.addAttribute("aboutList", aboutList);
+        model.addAttribute("amount", amount);
+        model.addAttribute("doctors", doctors);
+        model.addAttribute("services", services);
         return "index";
     }
 

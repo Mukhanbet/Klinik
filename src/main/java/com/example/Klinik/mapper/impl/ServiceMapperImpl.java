@@ -14,11 +14,12 @@ import java.util.List;
 public class ServiceMapperImpl implements ServiceMapper {
 
     @Override
-    public Service toService(ServiceRequest request, Image icon) {
+    public Service toService(ServiceRequest request, Image icon, Image mainImage) {
         Service service = new Service();
         service.setName(request.getName());
         service.setDescription(request.getDescription());
         service.setIcon(icon);
+        service.setMainImage(mainImage);
 
         return service;
     }
@@ -31,6 +32,9 @@ public class ServiceMapperImpl implements ServiceMapper {
         response.setDescription(service.getDescription());
         if (service.getIcon() != null) {
             response.setIconUrl(service.getIcon().getPath());
+        }
+        if (service.getMainImage() != null) {
+            response.setMainImageUrl(service.getMainImage().getPath());
         }
 
         return response;

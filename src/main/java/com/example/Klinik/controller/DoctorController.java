@@ -1,5 +1,6 @@
 package com.example.Klinik.controller;
 
+import com.example.Klinik.model.dto.doctor.AmountResponse;
 import com.example.Klinik.model.dto.doctor.DoctorResponse;
 import com.example.Klinik.service.DoctorService;
 import lombok.AllArgsConstructor;
@@ -18,5 +19,10 @@ public class DoctorController {
     @GetMapping
     public List<DoctorResponse> all() {
         return doctorService.all();
+    }
+
+    @GetMapping("/amount")
+    public AmountResponse getAmount() {
+        return doctorService.getAmount();
     }
 }
