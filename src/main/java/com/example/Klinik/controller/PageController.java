@@ -35,6 +35,9 @@ public class PageController {
     @GetMapping("/about")
     public String about(Model model) {
         List<About> aboutList = aboutService.all();
+        List<DoctorResponse> doctors = doctorService.all();
+
+        model.addAttribute("doctors", doctors);
         model.addAttribute("aboutList", aboutList);
 
         return "about";
